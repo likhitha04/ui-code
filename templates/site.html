@@ -1,11 +1,23 @@
-<!DOCTYPE html>
-<html lang = "en">
-   <head></head>
-   <body>
-      
-      <h3>Website</h3>
-
-      <table border =1>
+{% extends "bootstrap/base.html" %}
+{% block title %}my site{% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+  <div class ="navbar-header">
+  </div>
+  <ul class="nav navbar-nav navbar-right">
+     <li><h3>hello {{ some.username }}! <span class="glyphicon glyphicon-user"></span></h3></li>
+     
+  </ul>
+  </div>
+</div>
+</nav>
+{% endblock %}
+{% block html_attribs %} lang="en"{% endblock %}
+   
+  {% block content %}
+  <div class="container">
+      <table class="table table-bordered">
          <thead>
             <tr>
                <th>id</th>
@@ -20,28 +32,28 @@
                   <td>{{ records.id }}</td>
                   <td>{{ records.label }}</td>
                   <td><a href="{{records.url}}">Check file</td>
-                    <td>{{ records.typeof}}</td>
+                  <td>{{ records.typeof}}</td>
                </tr>
          </tbody>
       </table>
 
-      <form action = "{{ url_for('final',user=user) }}"  method = "POST">
-          <label for="f">user id</label>
-        <input type="integer" name="pq" id="f"  value="{{user}}" >
- <label for="fileno">Record id</label>
-        <input type="integer" name="pid" id="fileno" value="{{records.id}}">
-         <p>Are label and url related</p>
-            
-            <label for="a">YES</label>
-            <input name="ans" id="a" type="radio" value="yes">
-             <label for="b">NO</label>
-            <input name="ans" id="b" type="radio" value="no">
-       
-         
-        <input type = "submit" value = "submit" >
-      </form>
-      
-   </body>
-</html>
+      <form action = "{{ url_for('final',user=user,rid=records.id) }}"  method = "POST">
+          
+          
+          <p>Are label and url related</p>
+          <div class="radio"> 
+              <label><input type="radio" name="ans" value="yes" >Yes</label>
+          </div>
+          <div class="radio">
+              <label><input type="radio" name="ans" value="no" >No</label>
+          </div>
+          
+         <input type = "submit" class="btn btn-primary" value = "next" >
+       </form>
+
+    </div>
+
+   {% endblock %}
+
 
 
